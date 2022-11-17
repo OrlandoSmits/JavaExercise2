@@ -26,16 +26,31 @@ public class CarDealerServiceImpl implements CarDealerService {
 
     @Override
     public void addCarToDealer(String dealerName, UUID carId) {
-        // Use the carService to get a car. And add it to the dealer.
+        for (Dealer dealer : dealers) {
+            if (dealer.getName().equals(dealerName)) {
+                dealer.addCar(carService.getCarById(carId));
+                break;
+            }
+        }
     }
 
     @Override
     public void deleteCarFromDealer(UUID carId, String dealerName) {
-
+        for (Dealer dealer : dealers) {
+            if (dealer.getName().equals(dealerName)) {
+                dealer.removeCar(carService.getCarById(carId));
+                break;
+            }
+        }
     }
 
     @Override
     public List<Car> getAllCarsFromDealer(String dealerName) {
+        for (Dealer dealer : dealers) {
+            if (dealer.getName().equals(dealerName)) {
+                return dealer.getCars();
+            }
+        }
         return null;
     }
 

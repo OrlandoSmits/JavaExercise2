@@ -36,7 +36,7 @@ class CarDealerServiceImplTest {
         Car car = this.insertOneCar();
 
         carDealerService.addCarToDealer(dealer.getName(), car.getUuid());
-        List<Car> allCarsFromDealer = carDealerService.getAllCarsFromDealer(dealer.getName);
+        List<Car> allCarsFromDealer = carDealerService.getAllCarsFromDealer(dealer.getName());
 
         assertNotNull(allCarsFromDealer);
         assertEquals(1, allCarsFromDealer.size());
@@ -48,7 +48,7 @@ class CarDealerServiceImplTest {
         Car car = this.insertOneCar();
 
         carDealerService.addCarToDealer(dealer.getName(), car.getUuid());
-        carDealerService.deleteCarFromDealer(car.getUuid(), dealer.getDealerName());
+        carDealerService.deleteCarFromDealer(car.getUuid(), dealer.getName());
         List<Car> allCarsFromDealer = carDealerService.getAllCarsFromDealer(dealer.getName());
 
         assertEquals(0, allCarsFromDealer.size());
@@ -66,7 +66,7 @@ class CarDealerServiceImplTest {
     }
 
     private Dealer insertOneDealer() {
-        Dealer dealer = new Dealer();
+        Dealer dealer = new Dealer("Henk Scholten Volvo", "Nijmegen");
 
         carDealerService.addDealer(dealer);
 
