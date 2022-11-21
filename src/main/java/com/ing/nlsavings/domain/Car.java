@@ -50,4 +50,9 @@ public class Car {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Car{" + "uuid=" + uuid + ", name='" + name + '\'' + ", brand=" + brand + ", price=" + price + '}';
+    }
 }
