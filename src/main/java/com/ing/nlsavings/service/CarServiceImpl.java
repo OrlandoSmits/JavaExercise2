@@ -5,6 +5,7 @@ import com.ing.nlsavings.domain.Car;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class CarServiceImpl implements CarService {
 
@@ -34,6 +35,6 @@ public class CarServiceImpl implements CarService {
     public List<Car> getCarsByBrand(String brand) {
         return this.cars.stream()
                 .filter(car -> car.getBrand().toString().equalsIgnoreCase(brand))
-                .toList();
+                .collect(Collectors.toList());
     }
 }
