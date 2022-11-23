@@ -3,10 +3,10 @@ package com.ing.nlsavings.service;
 import com.ing.nlsavings.domain.Brand;
 import com.ing.nlsavings.domain.Car;
 import com.ing.nlsavings.domain.Dealer;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,7 +36,7 @@ class CarDealerServiceImplTest {
         Car car = this.insertOneCar();
 
         carDealerService.addCarToDealer(dealer.getName(), car.getUuid());
-        List<Car> allCarsFromDealer = carDealerService.getAllCarsFromDealer(dealer.getName);
+        List<Car> allCarsFromDealer = carDealerService.getAllCarsFromDealer(dealer.getName());
 
         assertNotNull(allCarsFromDealer);
         assertEquals(1, allCarsFromDealer.size());
@@ -48,7 +48,7 @@ class CarDealerServiceImplTest {
         Car car = this.insertOneCar();
 
         carDealerService.addCarToDealer(dealer.getName(), car.getUuid());
-        carDealerService.deleteCarFromDealer(car.getUuid(), dealer.getDealerName());
+        carDealerService.deleteCarFromDealer(car.getUuid(), dealer.getName());
         List<Car> allCarsFromDealer = carDealerService.getAllCarsFromDealer(dealer.getName());
 
         assertEquals(0, allCarsFromDealer.size());
@@ -65,8 +65,29 @@ class CarDealerServiceImplTest {
         assertEquals(1, allCarsFromDealer.size());
     }
 
+    @Test
+    void getAllCarsFromSpecificDealer(){
+        Dealer dealer01 = this.insertOneDealer();
+        carDealerService.addDealer(dealer01);
+        //Car car = this.insertOneCar();
+        //carDealerService.addCarToDealer(dealer.getName(), car.getUuid());
+        Dealer dealer02 = new Dealer("Louwman","Amsterdam", Collections.singletonList("null"));
+
+        carDealerService.addDealer(dealer02);
+
+        //Car car = this.insertOneCar();
+
+        List<Dealer> oneDealer= carDealerService.getDealer("Louwman");
+        assertNotNull(oneDealer);
+        assertEquals(3, oneDealer.size());
+
+    }
+
     private Dealer insertOneDealer() {
-        Dealer dealer = new Dealer();
+        String dealerName = "Van Mossel";
+        String dealerCity = "Utrecht";
+        List dealerCarsList = null;
+        Dealer dealer = new Dealer(dealerName,dealerCity, dealerCarsList);
 
         carDealerService.addDealer(dealer);
 
