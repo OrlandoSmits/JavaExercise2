@@ -32,7 +32,7 @@ public class CarDealerServiceImpl implements CarDealerService {
     @Override
     public void addCarToDealer(String dealerName, UUID carId) {
         // Use the carService to get a car. And add it to the dealer.
-        Car carById = CarService.getCarById(carId);
+        //Car carById = CarService.getCarById(carId);
         List<Dealer> addDealer = getDealer(dealerName);
         //this.dealers.add(addDealer.getName(),Dealer.getCity(), CarService.a(carId));
     }
