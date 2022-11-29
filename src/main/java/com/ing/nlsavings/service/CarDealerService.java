@@ -10,6 +10,8 @@ public interface CarDealerService {
 
     void addDealer(Dealer dealer);
 
+    List<Dealer> getDealer(String dealerName);
+
     List<Dealer> getAllDealers();
 
     void addCarToDealer(String dealerName, UUID carId);

@@ -11,7 +11,7 @@ public interface CarService {
 
     void deleteCarById(UUID carId);
 
-    Car getCarById(UUID carId);
+    void getCarById(UUID carId);
 
     List<Car> getAllCars();
 

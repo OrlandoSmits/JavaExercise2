@@ -2,7 +2,7 @@ package com.ing.nlsavings.domain;
 
 import java.util.UUID;
 
-public class Car {
+public class Car extends Dealer {
 
     private UUID uuid;
 
