@@ -20,8 +20,12 @@ public class CarDealerServiceImpl implements CarDealerService {
     }
 
     @Override
-    public List<Dealer> getDealer(String dealerName) {
-        return this.dealers;
+    public Dealer getDealer(String dealerName) {
+        return this.dealers.stream()
+                .filter(dealer -> dealer.getName().equalsIgnoreCase(dealerName))
+                .findFirst()
+                .orElse(null);
+
     }
 
     @Override
@@ -32,20 +36,24 @@ public class CarDealerServiceImpl implements CarDealerService {
     @Override
     public void addCarToDealer(String dealerName, UUID carId) {
         // Use the carService to get a car. And add it to the dealer.
-        //Car carById = CarService.getCarById(carId);
-        List<Dealer> addDealer = getDealer(dealerName);
+        Car carById = carService.getCarById(carId);
+        Dealer addDealer = getDealer(dealerName);
         //this.dealers.add(addDealer.getName(),Dealer.getCity(), CarService.a(carId));
+        addDealer.addCar(carById);
     }
 
     @Override
     public void deleteCarFromDealer(UUID carId, String dealerName) {
+        Car carById = carService.getCarById(carId);
+        Dealer deleteDealer = getDealer(dealerName);
+        deleteDealer.deleteCar(carById);
 
     }
 
     @Override
     public List<Car> getAllCarsFromDealer(String dealerName) {
-        Dealer dealerByName = (Dealer) getDealer(dealerName);
-        return (List<Car>) dealerByName;
+        Dealer dealerByName = getDealer(dealerName);
+        return dealerByName.getCars();
     }
 
     // IMPORTANT! Normally it is not allowed to make the carService available like this.
