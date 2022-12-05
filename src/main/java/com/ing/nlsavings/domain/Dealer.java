@@ -1,5 +1,6 @@
 package com.ing.nlsavings.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Dealer {
@@ -7,7 +8,7 @@ public class Dealer {
     private String city;
     private List<Car> cars;
 
-    public Dealer(String name, String city, List cars) {
+    public Dealer(String name, String city, List<Car> cars) {
         this.name = name;
         this.city = city;
         this.cars = cars;
@@ -32,11 +33,19 @@ public class Dealer {
         this.city = city;
     }
 
-    public List getCars() {
+    public List<Car> getCars() {
         return cars;
     }
 
     public void setCars(List cars) {
         this.cars = cars;
+    }
+
+    public void addCar(Car car){
+        this.cars.add(car);
+    }
+
+    public void deleteCar(Car car){
+        this.cars.remove(car);
     }
 }
